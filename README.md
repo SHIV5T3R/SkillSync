@@ -24,7 +24,7 @@ When you are contributing to the project, you will need to create a new branch b
 
 Once you have selected the branch type please create a branch name as a suffix. For example, if you had a branch that implemented a login button on the home page you would call it `feature/home-page-login-button`
 
-Upon completing your changes **that are tested**, please raise a pull request that merges **into development**, fill out the template and drop a link to the pull request in the "Ship-In-30" [discussion](https://discord.com/channels/368853404723707914/1073307477405335592) channel. You should also move the original issue into the `Code Review` column on the board. Upon review and approval, your changes will be submitted to the development branch. Then once the version is ready, it is released into production. 
+Upon completing your changes **that are tested**, please raise a pull request that merges **into development**, fill out the template and drop a link to the pull request in the "Ship-In-90" [discussion](https://discord.com/channels/368853404723707914/1073307477405335592) channel. You should also move the original issue into the `Code Review` column on the board. Upon review and approval, your changes will be submitted to the development branch. Then once the version is ready, it is released into production. 
 
 ### Tasks
 
