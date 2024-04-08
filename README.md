@@ -1,5 +1,5 @@
 # What is SkillSync?
-SkillSync is an open-source real-time collaborative code editor.
+SkillSync is an open-source peer-to-peer learning platform.
 
 ## Features
 
