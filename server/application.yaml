@@ -1,0 +1,14 @@
+#Skip data source configuration for now
+spring.autoconfigure.exclude=org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
+
+# spring: 
+#   datasource: 
+#     url: # database url
+#     username: # database username
+#     password: # database password
+#     driver-class-name: # database driver-class-name
+#   jpa:  
+#     database-platform: # database platform
+#     hibernate: 
+#       ddl-auto: update
+#   server:
