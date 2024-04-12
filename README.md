@@ -36,6 +36,57 @@ If you would like to unclaim a task, make sure to comment on the relevant issue 
 
 You can also collaborate on a task with another contributor, just let the rest of the team know in the issue discussion.
 
+### Spring Boot Backend Guidelines
+
+1. **Project Structure:**
+```
+backend
+│
+├── src
+│   ├── main
+│   │   ├── java
+│   │   │   └── com.skillsync.backend
+│   │   │       ├── config           // Configuration classes
+│   │   │       ├── controller       // REST API controllers
+│   │   │       ├── exception        // Custom exception classes
+│   │   │       ├── model            // Entity classes
+│   │   │       ├── payload          // Data Transfer Objects and request/response objects
+│   │   │       ├── repository       // Data access layer
+│   │   │       ├── service          // Business logic layer
+│   │   │       └── BackendApplication.java   // Main class
+│   │   │
+│   │   └── resources
+│   │       ├── static              // Static resources (css, js, etc.)
+│   │       ├── templates           // HTML templates
+│   │       └── application.yaml   // Application properties
+│   │
+│   └── test
+│       └── java
+            └── com.skillsync.backend // Test classes
+│
+├── .gitignore                      // Git ignore file
+├── pom.xml                         // Maven dependencies
+└── etc.
+```
+2. **Coding Conventions:**
+
+    - Class names should be nouns in UpperCamelCase.
+    - Method names should be verbs in lowerCamelCase.
+    - Variable names should be in lowerCamelCase.
+    - Constant names should be in uppercase with underscores separating words.
+    - Use 4 spaces for indentation. Follow standard Java formatting practices.
+    - ???
+    - etc.
+
+3. **Usage:**
+    - install (and use) Java 17 (and *optionally* Maven)
+    - before running the app set up a MySQL database and create the appropriate configuration file in the project's resources
+    - `.\mvnw spring-boot:run` to run the app (or just `mvn` if you have Maven)
+    - `.\mvnw test` to run the tests (or `mvn`)
+    - access the app at **http://localhost:8080**
+    - access endpoint documentation at **http://localhost:8080/swagger-ui/index.html**
+4. **???:**
+5. **etc.:**
 ---
 
 ![alt text](https://images-ext-1.discordapp.net/external/ZodgpNW25bKMHly3yapNdxjUcH8s__4xR5pqVxXy1dA/https/cdn-longterm.mee6.xyz/plugins/embeds/images/368853404723707914/668c5398d4a84cfbd3475ae6d201c456e398f819dcbf513c719b6d00aac67756.png?width=848&height=676)
