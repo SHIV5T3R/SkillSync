@@ -1,0 +1,30 @@
+# Create an application.yaml file from this template (it is git ignored to protect credentials)
+
+logging:
+  level:
+    org.springframework:
+      web: DEBUG
+      security: DEBUG
+server:
+  error:
+    include-stacktrace: never
+    include-binding-errors: always
+    include-exception: true
+    include-message: always
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/<database>
+    username: <username>
+    password: <password>
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
+    defer-datasource-initialization: true
+
+app:
+  cors:
+    allowedOrigins: https://example.com, http://localhost:3000
