@@ -26,5 +26,8 @@ spring:
     defer-datasource-initialization: true
 
 app:
+  auth:
+    tokenSecret: <token_secret> # must be >=64 characters preferably random alphanumeric characters
+    tokenExpirationMinutes: 60
   cors:
     allowedOrigins: https://example.com, http://localhost:3000
