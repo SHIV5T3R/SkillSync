@@ -25,7 +25,7 @@ public class SignupRequest {
     @Pattern(regexp = ".*[a-z].*", message = "Password must contain at least one lowercase letter")
     @Pattern(regexp = ".*[A-Z].*", message = "Password must contain at least one uppercase letter")
     @Pattern(regexp = ".*\\d.*", message = "Password must contain at least one digit")
-    @Pattern(regexp = ".*[()\\[\\]{}\"'\\-_.,;:!?`~|^@#$%&*+=].*", message = "Password must contain at least one special character !()[]{}\"'-_.,;:!?`~|^@#$%&*+=")
+    @Pattern(regexp = ".*[()\\[\\]{}\"'\\-_.,;:!?`~|^@#$%&*+=].*", message = "Password must contain at least one special character ()[]{}\"'-_.,;:!?`~|^@#$%&*+=")
     @Pattern(regexp = "^[^<>]*$", message = "Password cannot contain < or > characters")
     private String password;
 
