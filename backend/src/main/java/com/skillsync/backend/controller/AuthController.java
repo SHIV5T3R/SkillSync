@@ -72,8 +72,12 @@ public class AuthController {
 
     @PostMapping("/login")
     public ResponseEntity<AuthResponse> login(@Valid @RequestBody LoginRequest loginRequest) {
-        log.info("Request to log in as {}", loginRequest.getUsername());
-        return ResponseEntity.ok(new AuthResponse(authenticateAndGetToken(loginRequest.getUsername(), loginRequest.getPassword())));
+        String username = loginRequest.getUsername();
+        if (username == null) {
+            username = userService.getUserByEmail(loginRequest.getEmail()).getUsername();
+        }
+        log.info("Request to log in as {}", username);
+        return ResponseEntity.ok(new AuthResponse(authenticateAndGetToken(username, loginRequest.getPassword())));
     }
 
 }

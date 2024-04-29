@@ -10,8 +10,10 @@ import lombok.Data;
 @Data
 public class SignupRequest {
 
+    @Schema(description = "Username must be in the form of a valid Java variable name :D")
     @NotBlank
     @Size(max = 39)
+    @Pattern(regexp = "^[a-zA-Z_$][a-zA-Z_$0-9]*$", message = "Characters not allowed found in username")
     private String username;
 
     @NotBlank
