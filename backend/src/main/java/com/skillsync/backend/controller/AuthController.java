@@ -19,10 +19,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @Slf4j
 @RestController
@@ -78,6 +75,18 @@ public class AuthController {
         }
         log.info("Request to log in as {}", username);
         return ResponseEntity.ok(new AuthResponse(authenticateAndGetToken(username, loginRequest.getPassword())));
+    }
+
+    @PostMapping("/resetPassword")
+    public ResponseEntity<String> requestPasswordReset(@Valid @RequestParam("email") String email) {
+        log.info("resetPassword Starting password reset process for {}", email);
+        boolean emailSent = userService.sendPasswordResetEmail(email, passwordEncoder);
+
+        if(!emailSent) {
+            return new ResponseEntity<>("There was an issue processing your request, please try again.", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+        return new ResponseEntity<>("If your email is registered under an account, you will receive a password reset link.", HttpStatus.OK);
     }
 
 }
