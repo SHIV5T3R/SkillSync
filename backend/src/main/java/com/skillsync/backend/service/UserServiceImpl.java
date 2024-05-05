@@ -4,15 +4,44 @@ import com.skillsync.backend.exception.ResourceNotFoundException;
 import com.skillsync.backend.model.User;
 import com.skillsync.backend.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.security.SecureRandom;
 import java.util.Collection;
+import java.util.Optional;
+import java.util.stream.IntStream;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
+    private final JavaMailSender mailSender;
+
+    @Value("${spring.mail.username}")
+    private String from;
+
+    private static final String CHAR_LOWER = "abcdefghijklmnopqrstuvwxyz";
+    private static final String CHAR_UPPER = CHAR_LOWER.toUpperCase();
+    private static final String NUMBER = "0123456789";
+    private static final String OTHER_CHAR = "!@#$%&*()_+-=[]?";
+    private static final String PASSWORD_ALLOW_BASE = CHAR_LOWER + CHAR_UPPER + NUMBER + OTHER_CHAR;
+    private static final int PASSWORD_LENGTH = 8;
+
+    private static final SecureRandom random = new SecureRandom();
+
+    public String generateTempPassword() {
+        return IntStream.range(0, PASSWORD_LENGTH)
+                .map(i -> PASSWORD_ALLOW_BASE.charAt(random.nextInt(PASSWORD_ALLOW_BASE.length())))
+                .collect(StringBuilder::new, StringBuilder::appendCodePoint, StringBuilder::append)
+                .toString();
+    }
 
     @Override
     public Collection<User> getUsers() {
@@ -61,4 +90,34 @@ public class UserServiceImpl implements UserService {
         userRepository.deleteById(userId);
     }
 
+    public boolean sendPasswordResetEmail(String email, PasswordEncoder encoder) {
+
+        Optional<User> userData = userRepository.findByEmail(email);
+        try {
+
+            SimpleMailMessage message = new SimpleMailMessage();
+            message.setFrom(from);
+            message.setSubject("SkillSync Password Reset");
+            message.setTo(email);
+
+            log.info("sendPasswordResetEmail Drafting response email...");
+            if(userData.isPresent()) {
+                String tempPass = generateTempPassword();
+                userData.get().setPassword(encoder.encode(tempPass));
+                userRepository.save(userData.get());
+
+                message.setText("To access your account please login using this new password: " + tempPass + "\n" +
+                        "Be sure to update your password once logged in.") ;
+
+            } else {
+                message.setText("We did not find an existing account under this email..");
+            }
+            mailSender.send(message);
+            log.info("sendPasswordResetEmail Successfully sent email to " + email);
+            return true;
+        } catch (Exception e) {
+            log.error("sendPasswordResetEmail sending password reset request email failed {} ", e.getStackTrace());
+            return false;
+        }
+    }
 }
