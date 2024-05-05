@@ -54,6 +54,7 @@ backend
 │   │   │       ├── repository       // Data access layer
 │   │   │       ├── security         // Application security (authentication, etc.)
 │   │   │       ├── service          // Business logic layer
+│   │   │       ├── utils            // Utilities
 │   │   │       └── BackendApplication.java   // Main class
 │   │   │
 │   │   └── resources
