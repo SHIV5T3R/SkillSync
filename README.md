@@ -52,13 +52,16 @@ backend
 │   │   │       ├── model            // Entity classes
 │   │   │       ├── payload          // Data Transfer Objects and request/response objects
 │   │   │       ├── repository       // Data access layer
+│   │   │       ├── security         // Application security (authentication, etc.)
 │   │   │       ├── service          // Business logic layer
+│   │   │       ├── utils            // Utilities
 │   │   │       └── BackendApplication.java   // Main class
 │   │   │
 │   │   └── resources
 │   │       ├── static              // Static resources (css, js, etc.)
 │   │       ├── templates           // HTML templates
-│   │       └── application.yaml   // Application properties
+│   │       ├── applicationConfigTemplate.yaml  // Application properties example
+│   │       └── application.yaml    // Application properties
 │   │
 │   └── test
 │       └── java
@@ -84,7 +87,7 @@ backend
     - `.\mvnw spring-boot:run` to run the app (or just `mvn` if you have Maven)
     - `.\mvnw test` to run the tests (or `mvn`)
     - access the app at **http://localhost:8080**
-    - access endpoint documentation at **http://localhost:8080/swagger-ui/index.html**
+    - access endpoint documentation at **http://localhost:8080/swagger-ui/index.html** (you can also try the endpoints here)
 4. **???:**
 5. **etc.:**
 ---
