@@ -1,0 +1,32 @@
+version: '3'
+
+services:
+
+  app:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://db:3306/courses 
+      - SPRING_DATASOURCE_USERNAME=skillsync
+      - SPRING_DATASOURCE_PASSWORD=skillsync
+    depends_on:
+      - db
+
+  db:
+    image: mysql:latest
+    environment:
+      - MYSQL_DATABASE=courses
+      - MYSQL_USER=skillsync
+      - MYSQL_PASSWORD=skillsync
+      - MYSQL_ROOT_PASSWORD=root
+    volumes:
+      - db-data:/var/lib/mysql
+
+volumes:
+  db-data:
+
+#courses is the name of the database.
+#skillsync is the username and password for the mysql database container.
